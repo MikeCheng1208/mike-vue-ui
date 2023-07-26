@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>example</title>
+    <link rel="stylesheet" href="../dist/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{message}}</h1>
+      <m-input></m-input>
+      <m-button>mike button</m-button>
+    </div>
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.41/vue.esm-browser.prod.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import {
+        createApp,
+        ref,
+      } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.41/vue.esm-browser.prod.js";
+      import { MInput, MButton } from "../dist/mike-vue-ui.es.js";
+      createApp({
+        components: {
+          MInput,
+          MButton,
+        },
+        setup() {
+          const message = ref("Hello Vue!");
+          return {
+            message,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

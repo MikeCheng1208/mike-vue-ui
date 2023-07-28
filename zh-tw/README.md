@@ -50,7 +50,7 @@ npm install mike-vue-ui -S
   ## email input
   - 專門給 email 的 input，提供下拉選項使用
 
-  <img src="./assets/email-input.gif" />
+  <img src="../assets/email-input.gif" />
   <br/>
 
 ```javascript
@@ -77,7 +77,7 @@ const options = {
   <summary>2. 簡易的 table</summary>
 
 
-<img src="./assets/table.png" />
+<img src="../assets/table.png" />
 <br/>
 
 ```javascript

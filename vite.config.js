@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     cssCodeSplit: true,
     lib: {
-      entry: path.resolve(__dirname, "src/components/index.js"),
+      entry: path.resolve(__dirname, "src/index.js"),
       name: "MikeUi",
       fileName: (format) => `mike-vue-ui.${format}.js`,
       formats: ["es", "cjs", "iife"],

@@ -156,7 +156,11 @@ const rows = ref([
 ```
 
 ```html
-<vue-pure-table :columns="columns" :rows="rows"></vue-pure-table>
+<m-pure-table :columns="columns" :rows="rows">
+  <template #product="{data}">
+    <h3>😏 {{ data.rowData }}</h3>
+  </template>
+</m-pure-table>
 ```
 </details>
 

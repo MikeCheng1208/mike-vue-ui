@@ -30,7 +30,7 @@
 
 - 🎪 **Support for Vue 3** 
 - 🦾 **Simple and user-friendly UI components**
-- 🔋 **Developed with UnoCSS integration**
+- 🔋 **Develop the integration of UnoCSS (optional)**
 - 🔩 **Compatible with cjs, es, and iife versions**
 - 🌎 **Documentation available：** [中文](./zh-tw/README.md) | English
 

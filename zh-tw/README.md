@@ -30,7 +30,7 @@
 
 - 🎪 **支援Vue 3** 
 - 🦾 **簡單好用的UI組件**
-- 🔋 **開發導入UnoCSS**
+- 🔋 **開發導入UnoCSS（選用）**
 - 🔩 **支援 cjs es iife 版本**
 - 🌎 **文件支援：** 中文 | [English](../README.md)
 

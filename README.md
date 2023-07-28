@@ -40,8 +40,13 @@
 npm install mike-vue-ui -S
 ```
 
-## ⚡ Components
 
+### 🕶 Style
+```javascript
+import 'mike-vue-ui/dist/index.css';
+```
+
+## ⚡ Components
 
 <details>
   <summary>1. Email Input</summary>
@@ -70,12 +75,8 @@ const options = {
 
 <br/>
 
-
-
 <details>
-  <summary>2. Simple table.</summary>
-
-
+<summary>2. Simple table.</summary>
 <img src="./assets/table.png" />
 <br/>
 

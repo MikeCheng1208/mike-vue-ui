@@ -40,7 +40,10 @@
 ```
 npm install mike-vue-ui -S
 ```
-
+### 🕶 Style
+```javascript
+import 'mike-vue-ui/dist/index.css';
+```
 ## ⚡ Components
 
 

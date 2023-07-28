@@ -1,7 +1,7 @@
 <h1 align="center">Mike Vue UI</h1>
 
 <p align="center">
- mike ui for vue conf workshop.
+  給 vue conf 工作坊用的 Mike ui
 </p>
 
 <p align="center">
@@ -28,11 +28,12 @@
 
 ## 🚀 Features
 
-- 🎪 **Support for Vue 3** 
-- 🦾 **Simple and user-friendly UI components**
-- 🔋 **Developed with UnoCSS integration**
-- 🔩 **Compatible with cjs, es, and iife versions**
-- 🌎 **Documentation available：** [中文](./zh-tw/README.md) | English
+- 🎪 **支援Vue 3** 
+- 🦾 **簡單好用的UI組件**
+- 🔋 **開發導入UnoCSS**
+- 🔩 **支援 cjs es iife 版本**
+- 🌎 **文件支援：** 中文 | [English](../README.md)
+
 
 
 ### 📦 Installation
@@ -44,10 +45,10 @@ npm install mike-vue-ui -S
 
 
 <details>
-  <summary>1. Email Input</summary>
+  <summary>1. Email 的輸入表單</summary>
 
   ## email input
-  - Specialized input for emails, providing a dropdown selection.
+  - 專門給 email 的 input，提供下拉選項使用
 
   <img src="./assets/email-input.gif" />
   <br/>
@@ -73,7 +74,7 @@ npm install mike-vue-ui -S
 
 
 <details>
-  <summary>2. Simple table.</summary>
+  <summary>2. 簡易的 table</summary>
 
 
 <img src="./assets/table.png" />

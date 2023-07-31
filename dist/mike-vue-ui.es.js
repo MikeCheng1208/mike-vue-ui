@@ -1,4 +1,4 @@
-import { getCurrentScope as T, onScopeDispose as C, unref as L, watch as I, ref as k, computed as x, openBlock as p, createElementBlock as f, createElementVNode as h, Fragment as w, renderList as g, toDisplayString as S, createCommentVNode as N, useSlots as D, normalizeStyle as E, renderSlot as F } from "vue";
+import { getCurrentScope as T, onScopeDispose as C, unref as L, watch as I, ref as x, computed as b, openBlock as p, createElementBlock as f, createElementVNode as h, Fragment as w, renderList as g, toDisplayString as S, createCommentVNode as N, useSlots as D, normalizeStyle as E, renderSlot as F } from "vue";
 function j(t) {
   return T() ? (C(t), !0) : !1;
 }
@@ -17,23 +17,23 @@ function v(t) {
   return (l = o == null ? void 0 : o.$el) != null ? l : o;
 }
 const P = M ? window : void 0;
-function b(...t) {
+function k(...t) {
   let l, o, n, u;
   if (typeof t[0] == "string" || Array.isArray(t[0]) ? ([o, n, u] = t, l = P) : [l, o, n, u] = t, !l)
     return O;
   Array.isArray(o) || (o = [o]), Array.isArray(n) || (n = [n]);
   const m = [], a = () => {
     m.forEach((s) => s()), m.length = 0;
-  }, c = (s, d, e, r) => (s.addEventListener(d, e, r), () => s.removeEventListener(d, e, r)), i = I(
+  }, i = (s, d, e, r) => (s.addEventListener(d, e, r), () => s.removeEventListener(d, e, r)), c = I(
     () => [v(l), V(u)],
     ([s, d]) => {
       a(), s && m.push(
-        ...o.flatMap((e) => n.map((r) => c(s, e, r, d)))
+        ...o.flatMap((e) => n.map((r) => i(s, e, r, d)))
       );
     },
     { immediate: !0, flush: "post" }
   ), _ = () => {
-    i(), a();
+    c(), a();
   };
   return j(_), _;
 }
@@ -43,8 +43,8 @@ function W(t, l, o = {}) {
   if (!n)
     return;
   B && !A && (A = !0, Array.from(n.document.body.children).forEach((e) => e.addEventListener("click", O)));
-  let c = !0;
-  const i = (e) => u.some((r) => {
+  let i = !0;
+  const c = (e) => u.some((r) => {
     if (typeof r == "string")
       return Array.from(n.document.querySelectorAll(r)).some((y) => y === e.target || e.composedPath().includes(y));
     {
@@ -52,21 +52,21 @@ function W(t, l, o = {}) {
       return y && (e.target === y || e.composedPath().includes(y));
     }
   }), s = [
-    b(n, "click", (e) => {
+    k(n, "click", (e) => {
       const r = v(t);
       if (!(!r || r === e.target || e.composedPath().includes(r))) {
-        if (e.detail === 0 && (c = !i(e)), !c) {
-          c = !0;
+        if (e.detail === 0 && (i = !c(e)), !i) {
+          i = !0;
           return;
         }
         l(e);
       }
     }, { passive: !0, capture: m }),
-    b(n, "pointerdown", (e) => {
+    k(n, "pointerdown", (e) => {
       const r = v(t);
-      r && (c = !e.composedPath().includes(r) && !i(e));
+      r && (i = !e.composedPath().includes(r) && !c(e));
     }, { passive: !0 }),
-    a && b(n, "blur", (e) => {
+    a && k(n, "blur", (e) => {
       setTimeout(() => {
         var r;
         const y = v(t);
@@ -108,16 +108,16 @@ const $ = (t, l) => {
   },
   emits: ["update:modelValue"],
   setup(t, { emit: l }) {
-    const o = t, n = k(null), u = k(!1), m = k(!1);
+    const o = t, n = x(null), u = x(!1), m = x(!1);
     W(n, (s) => {
       u.value = !1;
     });
-    const a = x(() => o.options.suffix ? o.options.suffix.map((s) => o.modelValue.split("@")[0] + s) : []), c = (s) => {
+    const a = b(() => o.options.suffix ? o.options.suffix.map((s) => o.modelValue.split("@")[0] + s) : []), i = (s) => {
       l("update:modelValue", s);
-    }, i = () => {
+    }, c = () => {
       u.value = o.modelValue.length !== 0;
     }, _ = (s) => {
-      m.value = !0, u.value = !1, c(s), setTimeout(() => {
+      m.value = !0, u.value = !1, i(s), setTimeout(() => {
         m.value = !1;
       }, 300);
     };
@@ -134,8 +134,9 @@ const $ = (t, l) => {
         "h-full": "",
         "pl-10px": "",
         value: t.modelValue,
-        onInput: d[0] || (d[0] = (e) => c(e.target.value)),
-        onFocus: i
+        border: "0px x-1px gray-4 solid",
+        onInput: d[0] || (d[0] = (e) => i(e.target.value)),
+        onFocus: c
       }, null, 40, z),
       u.value ? (p(), f("ul", G, [
         (p(!0), f(w, null, g(a.value, (e) => (p(), f("li", {
@@ -156,7 +157,7 @@ const $ = (t, l) => {
       ])) : N("", !0)
     ]));
   }
-}, ee = /* @__PURE__ */ $(J, [["__scopeId", "data-v-3882209c"]]);
+}, ee = /* @__PURE__ */ $(J, [["__scopeId", "data-v-e6c6241f"]]);
 const K = { class: "vue-pure-table" }, Q = { id: "columns" }, U = {
   id: "rows",
   class: "flex-col"
@@ -173,24 +174,24 @@ const K = { class: "vue-pure-table" }, Q = { id: "columns" }, U = {
     }
   },
   setup(t) {
-    const l = t, o = D(), n = x(() => l.columns.map((a) => a.field)), u = x(() => l.rows.map((a) => {
-      const c = [];
-      return Object.keys(a).forEach((i, _) => {
-        n.value[_] && c.push(a[n.value[_]]);
-      }), c;
+    const l = t, o = D(), n = b(() => l.columns.map((a) => a.field)), u = b(() => l.rows.map((a) => {
+      const i = [];
+      return Object.keys(a).forEach((c, _) => {
+        n.value[_] && i.push(a[n.value[_]]);
+      }), i;
     })), m = (a) => Object.keys(o).includes(a);
-    return (a, c) => (p(), f("div", K, [
+    return (a, i) => (p(), f("div", K, [
       h("ul", Q, [
-        (p(!0), f(w, null, g(l.columns, (i) => (p(), f("li", {
-          key: i.label,
+        (p(!0), f(w, null, g(l.columns, (c) => (p(), f("li", {
+          key: c.label,
           class: "table_columns",
-          style: E(i.style)
-        }, S(i.label), 5))), 128))
+          style: E(c.style)
+        }, S(c.label), 5))), 128))
       ]),
       h("ul", U, [
-        (p(!0), f(w, null, g(u.value, (i, _) => (p(), f("li", { key: _ }, [
+        (p(!0), f(w, null, g(u.value, (c, _) => (p(), f("li", { key: _ }, [
           h("ul", null, [
-            (p(!0), f(w, null, g(i, (s, d) => (p(), f("li", {
+            (p(!0), f(w, null, g(c, (s, d) => (p(), f("li", {
               key: s.id,
               style: E(l.columns[d].style)
             }, [
@@ -204,7 +205,7 @@ const K = { class: "vue-pure-table" }, Q = { id: "columns" }, U = {
       ])
     ]));
   }
-}, te = /* @__PURE__ */ $(Y, [["__scopeId", "data-v-947644cc"]]);
+}, te = /* @__PURE__ */ $(Y, [["__scopeId", "data-v-38a75e1e"]]);
 export {
   ee as MEmailInput,
   te as MPureTable

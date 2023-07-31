@@ -67,6 +67,7 @@ watch(
       h-full
       pl-10px
       :value="modelValue"
+      border="0px x-1px gray-4 solid"
       @input="updateValue($event.target.value)"
       @focus="onFocus"
     />

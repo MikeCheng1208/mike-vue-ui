@@ -1,4 +1,4 @@
-import { getCurrentScope as T, onScopeDispose as C, unref as L, watch as I, ref as x, computed as b, openBlock as p, createElementBlock as f, createElementVNode as h, Fragment as w, renderList as g, toDisplayString as S, createCommentVNode as N, useSlots as D, normalizeStyle as E, renderSlot as F } from "vue";
+import { getCurrentScope as T, onScopeDispose as C, unref as L, watch as I, ref as k, computed as x, openBlock as p, createElementBlock as f, createElementVNode as h, Fragment as w, renderList as g, toDisplayString as S, createCommentVNode as N, useSlots as D, normalizeStyle as E, renderSlot as F } from "vue";
 function j(t) {
   return T() ? (C(t), !0) : !1;
 }
@@ -17,7 +17,7 @@ function v(t) {
   return (l = o == null ? void 0 : o.$el) != null ? l : o;
 }
 const P = M ? window : void 0;
-function k(...t) {
+function b(...t) {
   let l, o, n, u;
   if (typeof t[0] == "string" || Array.isArray(t[0]) ? ([o, n, u] = t, l = P) : [l, o, n, u] = t, !l)
     return O;
@@ -52,7 +52,7 @@ function W(t, l, o = {}) {
       return y && (e.target === y || e.composedPath().includes(y));
     }
   }), s = [
-    k(n, "click", (e) => {
+    b(n, "click", (e) => {
       const r = v(t);
       if (!(!r || r === e.target || e.composedPath().includes(r))) {
         if (e.detail === 0 && (i = !c(e)), !i) {
@@ -62,11 +62,11 @@ function W(t, l, o = {}) {
         l(e);
       }
     }, { passive: !0, capture: m }),
-    k(n, "pointerdown", (e) => {
+    b(n, "pointerdown", (e) => {
       const r = v(t);
       r && (i = !e.composedPath().includes(r) && !c(e));
     }, { passive: !0 }),
-    a && k(n, "blur", (e) => {
+    a && b(n, "blur", (e) => {
       setTimeout(() => {
         var r;
         const y = v(t);
@@ -108,11 +108,11 @@ const $ = (t, l) => {
   },
   emits: ["update:modelValue"],
   setup(t, { emit: l }) {
-    const o = t, n = x(null), u = x(!1), m = x(!1);
+    const o = t, n = k(null), u = k(!1), m = k(!1);
     W(n, (s) => {
       u.value = !1;
     });
-    const a = b(() => o.options.suffix ? o.options.suffix.map((s) => o.modelValue.split("@")[0] + s) : []), i = (s) => {
+    const a = x(() => o.options.suffix ? o.options.suffix.map((s) => o.modelValue.split("@")[0] + s) : []), i = (s) => {
       l("update:modelValue", s);
     }, c = () => {
       u.value = o.modelValue.length !== 0;
@@ -134,7 +134,7 @@ const $ = (t, l) => {
         "h-full": "",
         "pl-10px": "",
         value: t.modelValue,
-        border: "0px x-1px gray-4 solid",
+        border: "1px gray-4 solid",
         onInput: d[0] || (d[0] = (e) => i(e.target.value)),
         onFocus: c
       }, null, 40, z),
@@ -157,7 +157,7 @@ const $ = (t, l) => {
       ])) : N("", !0)
     ]));
   }
-}, ee = /* @__PURE__ */ $(J, [["__scopeId", "data-v-e6c6241f"]]);
+}, ee = /* @__PURE__ */ $(J, [["__scopeId", "data-v-5d750eee"]]);
 const K = { class: "vue-pure-table" }, Q = { id: "columns" }, U = {
   id: "rows",
   class: "flex-col"
@@ -174,7 +174,7 @@ const K = { class: "vue-pure-table" }, Q = { id: "columns" }, U = {
     }
   },
   setup(t) {
-    const l = t, o = D(), n = b(() => l.columns.map((a) => a.field)), u = b(() => l.rows.map((a) => {
+    const l = t, o = D(), n = x(() => l.columns.map((a) => a.field)), u = x(() => l.rows.map((a) => {
       const i = [];
       return Object.keys(a).forEach((c, _) => {
         n.value[_] && i.push(a[n.value[_]]);

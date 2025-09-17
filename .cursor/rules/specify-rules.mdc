@@ -1,0 +1,85 @@
+# Mike Vue UI 專案上下文 - PinInput 組件
+
+## 專案概述
+- **專案類型**: Vue3 UI 組件庫
+- **當前功能**: PinInput 密碼輸入組件開發
+- **語言**: JavaScript ES6+ (不使用 TypeScript)
+- **框架**: Vue 3 Composition API + setup script 語法糖
+- **結構**: SFC 順序 script > template > style
+
+## 技術堆疊
+- **Vue**: 3.x Composition API
+- **JavaScript**: ES6+ 語法
+- **CSS**: Scoped CSS + CSS 變數
+- **建置工具**: Vite
+- **不使用**: TypeScript, 外部 CSS 框架, 測試框架
+
+## 開發約束
+1. **語言要求**: 所有文檔使用正體中文，程式碼註釋中文，變數名英文
+2. **編碼風格**: 採用最佳實踐，維持現有架構風格
+3. **SFC 順序**: `<script setup>` > `<template>` > `<style scoped>`
+4. **不寫測試**: 根據憲章規定不需要撰寫測試
+
+## 當前任務: PinInput 組件
+- **功能**: 密碼/驗證碼輸入組件
+- **預設**: 5位數，可自定義長度
+- **行為**: 自動跳轉、智能刪除
+- **狀態**: 設計階段完成，準備實作
+
+## 專案結構
+```
+src/
+├── components/
+│   ├── MEmailInput.vue     # 現有組件
+│   ├── MPureTable.vue      # 現有組件  
+│   └── MPinInput.vue       # 新增組件 (待實作)
+└── index.js                # 主要導出
+
+specs/001-pininput-input-input/
+├── spec.md                 # 功能規格
+├── plan.md                 # 實作計劃
+├── research.md             # 技術研究
+├── data-model.md           # 資料模型
+├── quickstart.md           # 快速開始
+└── contracts/              # API 合約
+```
+
+## 組件 API 設計
+```javascript
+// Props
+const props = defineProps({
+  length: { type: Number, default: 5 },
+  disabled: { type: Boolean, default: false },
+  modelValue: { type: String, default: '' }
+})
+
+// Emits
+const emit = defineEmits([
+  'update:modelValue', 
+  'complete', 
+  'change'
+])
+
+// Expose
+defineExpose({
+  focus: (index) => {},
+  clear: () => {},
+  getValue: () => {},
+  setValue: (value) => {}
+})
+```
+
+## 實作重點
+1. **響應式狀態管理**: 使用 ref/reactive
+2. **焦點管理**: DOM refs + focus() API
+3. **鍵盤事件**: keydown + input 事件組合
+4. **輸入驗證**: 正則表達式 `/^\d$/`
+5. **可訪問性**: ARIA 屬性 + 鍵盤導航
+
+## 最近更新
+- ✅ 完成功能規格 (spec.md)
+- ✅ 完成技術研究 (research.md)  
+- ✅ 完成資料模型設計 (data-model.md)
+- ✅ 完成 API 合約 (contracts/)
+- ✅ 完成快速開始指南 (quickstart.md)
+- 🔄 準備開始組件實作

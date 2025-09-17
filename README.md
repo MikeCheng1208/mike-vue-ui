@@ -76,7 +76,71 @@ const options = {
 <br/>
 
 <details>
-<summary>2. Simple table.</summary>
+<summary>2. Pin Input</summary>
+
+## Pin Input
+- 密碼輸入組件，支援自定義長度、智能焦點管理和刪除行為
+- 適用於 PIN 碼、驗證碼等固定位數輸入場景
+
+```javascript
+import { MPinInput } from "mike-vue-ui";
+
+const pinValue = ref("");
+
+// 完成輸入時的回調
+const onComplete = (value) => {
+  console.log('輸入完成:', value);
+};
+
+// 單個框改變時的回調
+const onChange = (value, index) => {
+  console.log(`第 ${index + 1} 個框改變:`, value);
+};
+```
+
+```html
+<!-- 基本使用（預設 5 位數） -->
+<m-pin-input v-model="pinValue" @complete="onComplete" @change="onChange"></m-pin-input>
+
+<!-- 自定義長度 -->
+<m-pin-input v-model="pinValue" :length="4"></m-pin-input>
+
+<!-- 禁用狀態 -->
+<m-pin-input v-model="pinValue" :disabled="true"></m-pin-input>
+```
+
+### 程式化控制
+```javascript
+// 獲取組件引用
+const pinInputRef = ref(null);
+
+// 設定值
+pinInputRef.value.setValue('1234');
+
+// 清空所有
+pinInputRef.value.clear();
+
+// 設定焦點到指定位置
+pinInputRef.value.focus(2); // 第3個框
+
+// 獲取當前值
+const currentValue = pinInputRef.value.getValue();
+```
+
+### 特色功能
+- ✅ **智能焦點管理**: 輸入時自動跳轉，刪除時智能回跳
+- ✅ **輸入驗證**: 只接受數字字符
+- ✅ **可訪問性支援**: ARIA 屬性、鍵盤導航
+- ✅ **自定義主題**: CSS 變數支援
+- ✅ **響應式設計**: 支援行動裝置
+- ✅ **程式化控制**: 完整的 API 方法
+
+</details>
+
+<br/>
+
+<details>
+<summary>3. Simple table.</summary>
 <img src="./assets/table.png" />
 <br/>
 

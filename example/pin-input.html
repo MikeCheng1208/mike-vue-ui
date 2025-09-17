@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MPinInput 組件範例</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f8fafc;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #1f2937;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        color: #6b7280;
+        margin-bottom: 32px;
+      }
+
+      .demo-section {
+        margin: 32px 0;
+        padding: 24px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background: #fafbfc;
+      }
+
+      .demo-section h3 {
+        margin-top: 0;
+        color: #374151;
+      }
+
+      .demo-content {
+        margin: 16px 0;
+      }
+
+      .info {
+        background: #f0f9ff;
+        border: 1px solid #bae6fd;
+        border-radius: 6px;
+        padding: 12px;
+        margin: 12px 0;
+        color: #0c4a6e;
+      }
+
+      .controls {
+        margin-top: 16px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .controls button {
+        padding: 8px 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: white;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+
+      .controls button:hover {
+        background: #f3f4f6;
+        border-color: #9ca3af;
+      }
+
+      .controls button:active {
+        transform: translateY(1px);
+      }
+
+      .status {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .status.completed {
+        color: #059669;
+        font-weight: 500;
+      }
+
+      .custom-theme {
+        --pin-input-size: 56px;
+        --pin-input-gap: 12px;
+        --pin-input-border-color: #e11d48;
+        --pin-input-focus-color: #be185d;
+        --pin-input-border-radius: 12px;
+      }
+
+      .small-theme {
+        --pin-input-size: 32px;
+        --pin-input-gap: 4px;
+        --pin-input-font-size: 14px;
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          padding: 16px;
+        }
+
+        .controls {
+          flex-direction: column;
+        }
+
+        .controls button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <h1>MPinInput 組件範例</h1>
+        <p class="subtitle">
+          密碼輸入組件，支援自定義長度、智能焦點管理和刪除行為
+        </p>
+
+        <!-- 基本使用 -->
+        <div class="demo-section">
+          <h3>🎯 基本使用（預設 5 位數）</h3>
+          <div class="demo-content">
+            <m-pin-input
+              v-model="pinValue1"
+              @complete="onComplete1"
+              @change="onChange1"
+            ></m-pin-input>
+          </div>
+          <div class="info">
+            當前值: <strong>{{ pinValue1 || '(空)' }}</strong><br />
+            狀態:
+            <span :class="{ completed: completed1 }"
+              >{{ completed1 ? '✅ 已完成' : '⏳ 輸入中' }}</span
+            >
+          </div>
+        </div>
+
+        <!-- 自定義長度 -->
+        <div class="demo-section">
+          <h3>📏 自定義長度</h3>
+          <div class="demo-content">
+            <div style="margin-bottom: 16px">
+              <label>4 位數驗證碼：</label>
+              <m-pin-input
+                v-model="pinValue2"
+                :length="4"
+                @complete="onComplete2"
+              ></m-pin-input>
+            </div>
+            <div>
+              <label>6 位數密碼：</label>
+              <m-pin-input v-model="pinValue3" :length="6"></m-pin-input>
+            </div>
+          </div>
+          <div class="info">
+            4位數值: <strong>{{ pinValue2 || '(空)' }}</strong><br />
+            6位數值: <strong>{{ pinValue3 || '(空)' }}</strong>
+          </div>
+        </div>
+
+        <!-- 禁用狀態 -->
+        <div class="demo-section">
+          <h3>🚫 禁用狀態</h3>
+          <div class="demo-content">
+            <m-pin-input
+              v-model="pinValue4"
+              :disabled="isDisabled"
+            ></m-pin-input>
+          </div>
+          <div class="controls">
+            <button @click="toggleDisabled">
+              {{ isDisabled ? '啟用組件' : '禁用組件' }}
+            </button>
+          </div>
+          <div class="info">
+            狀態: {{ isDisabled ? '已禁用' : '已啟用' }}<br />
+            值: <strong>{{ pinValue4 || '(空)' }}</strong>
+          </div>
+        </div>
+
+        <!-- 程式化控制 -->
+        <div class="demo-section">
+          <h3>🎮 程式化控制</h3>
+          <div class="demo-content">
+            <m-pin-input
+              ref="pinInputRef"
+              v-model="pinValue5"
+              @change="onChange5"
+            ></m-pin-input>
+          </div>
+          <div class="controls">
+            <button @click="setValue">設定值 "12345"</button>
+            <button @click="clearValue">清空所有</button>
+            <button @click="focusFirst">焦點到第1個</button>
+            <button @click="focusThird">焦點到第3個</button>
+            <button @click="getValue">獲取當前值</button>
+          </div>
+          <div class="info">
+            當前值: <strong>{{ pinValue5 || '(空)' }}</strong><br />
+            <span v-if="lastGetValue"
+              >最後獲取值: <strong>{{ lastGetValue }}</strong></span
+            >
+          </div>
+        </div>
+
+        <!-- 自定義主題 -->
+        <div class="demo-section">
+          <h3>🎨 自定義主題</h3>
+          <div class="demo-content">
+            <div style="margin-bottom: 16px">
+              <label>紅色主題（大尺寸）：</label>
+              <div class="custom-theme">
+                <m-pin-input v-model="pinValue6" :length="4"></m-pin-input>
+              </div>
+            </div>
+            <div>
+              <label>小尺寸主題：</label>
+              <div class="small-theme">
+                <m-pin-input v-model="pinValue7" :length="6"></m-pin-input>
+              </div>
+            </div>
+          </div>
+          <div class="info">
+            紅色主題值: <strong>{{ pinValue6 || '(空)' }}</strong><br />
+            小尺寸值: <strong>{{ pinValue7 || '(空)' }}</strong>
+          </div>
+        </div>
+
+        <!-- 使用說明 -->
+        <div class="demo-section">
+          <h3>📖 使用說明</h3>
+          <div class="info">
+            <strong>鍵盤操作：</strong><br />
+            • 數字鍵 (0-9)：輸入數字並自動跳到下一框<br />
+            • Backspace：刪除當前框或跳到前一框<br />
+            • Delete：刪除當前框內容<br />
+            • 方向鍵：在輸入框間移動<br />
+            • Tab：標準焦點導航<br /><br />
+
+            <strong>滑鼠操作：</strong><br />
+            • 點擊任意輸入框設定焦點<br />
+            • 支援拖拽選取（但會被阻止以保持一致性）<br /><br />
+
+            <strong>智能行為：</strong><br />
+            • 自動跳轉：輸入數字後自動移到下一框<br />
+            • 智能刪除：空框刪除時跳到前一框<br />
+            • 輸入驗證：只接受數字字符<br />
+            • 完成檢測：所有框填滿時觸發完成事件
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      // 導入實際組件（開發時使用）
+      // import { MPinInput } from '../dist/mike-vue-ui.es.js'
+
+      // 臨時組件定義（用於演示）
+      const MPinInput = {
+        template: `
+                 <div 
+                     class="m-pin-input"
+                     role="group"
+                     :aria-label="\`密碼輸入，共 \${length} 位數\`"
+                 >
+                     <input
+                         v-for="(value, index) in inputValues"
+                         :key="index"
+                         :ref="(el) => setInputRef(el, index)"
+                         :value="value"
+                         type="text"
+                         inputmode="numeric"
+                         autocomplete="off"
+                         maxlength="1"
+                         class="m-pin-input__item"
+                         :class="{
+                             'm-pin-input__item--focused': currentIndex === index,
+                             'm-pin-input__item--filled': value !== '',
+                             'm-pin-input__item--disabled': disabled
+                         }"
+                         :disabled="disabled"
+                         :aria-label="\`第 \${index + 1} 位數字\`"
+                         @input="handleInput($event, index)"
+                         @keydown="handleKeydown($event, index)"
+                         @focus="handleFocus(index)"
+                         @click="handleClick(index)"
+                     />
+                 </div>
+             `,
+        props: {
+          length: { type: Number, default: 5 },
+          disabled: { type: Boolean, default: false },
+          modelValue: { type: String, default: "" },
+        },
+        emits: ["update:modelValue", "complete", "change"],
+        setup(props, { emit }) {
+          const { ref, computed, nextTick, watch } = Vue;
+
+          const inputValues = ref([]);
+          const currentIndex = ref(0);
+          const inputRefs = ref([]);
+
+          const initializeValues = () => {
+            inputValues.value = new Array(props.length).fill("");
+            if (props.modelValue) {
+              const chars = props.modelValue.split("").slice(0, props.length);
+              chars.forEach((char, index) => {
+                if (/^\d$/.test(char)) {
+                  inputValues.value[index] = char;
+                }
+              });
+              const nextEmptyIndex = inputValues.value.findIndex(
+                (val) => val === ""
+              );
+              currentIndex.value =
+                nextEmptyIndex === -1 ? props.length - 1 : nextEmptyIndex;
+            }
+          };
+
+          const fullValue = computed(() => inputValues.value.join(""));
+
+          watch(() => props.length, initializeValues, { immediate: true });
+          watch(
+            () => props.modelValue,
+            (newValue) => {
+              if (newValue !== fullValue.value) {
+                initializeValues();
+              }
+            }
+          );
+
+          watch(fullValue, (newValue) => {
+            emit("update:modelValue", newValue);
+            if (
+              newValue.length === props.length &&
+              newValue.split("").every((char) => /^\d$/.test(char))
+            ) {
+              emit("complete", newValue);
+            }
+          });
+
+          const setInputRef = (el, index) => {
+            if (el) inputRefs.value[index] = el;
+          };
+
+          const focusInput = (index) => {
+            if (index >= 0 && index < props.length && inputRefs.value[index]) {
+              inputRefs.value[index].focus();
+              currentIndex.value = index;
+            }
+          };
+
+          const isValidInput = (value) => /^\d$/.test(value);
+
+          const handleInput = (event, index) => {
+            if (props.disabled) return;
+            const inputValue = event.target.value;
+            const lastChar = inputValue.slice(-1);
+
+            if (lastChar && !isValidInput(lastChar)) {
+              event.target.value = inputValues.value[index];
+              return;
+            }
+
+            if (lastChar && isValidInput(lastChar)) {
+              inputValues.value[index] = lastChar;
+              emit("change", fullValue.value, index);
+              if (index < props.length - 1) {
+                nextTick(() => focusInput(index + 1));
+              }
+            } else if (inputValue === "") {
+              inputValues.value[index] = "";
+              emit("change", fullValue.value, index);
+            }
+          };
+
+          const handleKeydown = (event, index) => {
+            if (props.disabled) return;
+            const { key } = event;
+
+            if (key === "Backspace") {
+              event.preventDefault();
+              if (inputValues.value[index] !== "") {
+                inputValues.value[index] = "";
+                emit("change", fullValue.value, index);
+              } else if (index > 0) {
+                inputValues.value[index - 1] = "";
+                emit("change", fullValue.value, index - 1);
+                nextTick(() => focusInput(index - 1));
+              }
+              return;
+            }
+
+            if (key === "Delete") {
+              event.preventDefault();
+              inputValues.value[index] = "";
+              emit("change", fullValue.value, index);
+              return;
+            }
+
+            if (key === "ArrowLeft" && index > 0) {
+              event.preventDefault();
+              focusInput(index - 1);
+              return;
+            }
+
+            if (key === "ArrowRight" && index < props.length - 1) {
+              event.preventDefault();
+              focusInput(index + 1);
+              return;
+            }
+
+            if (isValidInput(key)) {
+              event.preventDefault();
+              inputValues.value[index] = key;
+              emit("change", fullValue.value, index);
+              if (index < props.length - 1) {
+                nextTick(() => focusInput(index + 1));
+              }
+              return;
+            }
+
+            if (
+              !/^(Tab|Shift|Control|Alt|Meta|CapsLock)$/.test(key) &&
+              !key.startsWith("Arrow")
+            ) {
+              event.preventDefault();
+            }
+          };
+
+          const handleFocus = (index) => {
+            if (props.disabled) return;
+            currentIndex.value = index;
+          };
+
+          const handleClick = (index) => {
+            if (props.disabled) return;
+            focusInput(index);
+          };
+
+          const focus = (index) => {
+            if (typeof index === "number") {
+              focusInput(index);
+            } else {
+              const emptyIndex = inputValues.value.findIndex(
+                (val) => val === ""
+              );
+              const targetIndex =
+                emptyIndex === -1 ? props.length - 1 : emptyIndex;
+              focusInput(targetIndex);
+            }
+          };
+
+          const clear = () => {
+            inputValues.value = new Array(props.length).fill("");
+            currentIndex.value = 0;
+            nextTick(() => focusInput(0));
+          };
+
+          const getValue = () => fullValue.value;
+
+          const setValue = (value) => {
+            if (typeof value !== "string") return;
+            inputValues.value = new Array(props.length).fill("");
+            const chars = value.split("").slice(0, props.length);
+            chars.forEach((char, index) => {
+              if (isValidInput(char)) {
+                inputValues.value[index] = char;
+              }
+            });
+            const nextEmptyIndex = inputValues.value.findIndex(
+              (val) => val === ""
+            );
+            const targetIndex =
+              nextEmptyIndex === -1 ? props.length - 1 : nextEmptyIndex;
+            nextTick(() => focusInput(targetIndex));
+          };
+
+          return {
+            inputValues,
+            currentIndex,
+            setInputRef,
+            handleInput,
+            handleKeydown,
+            handleFocus,
+            handleClick,
+            focus,
+            clear,
+            getValue,
+            setValue,
+          };
+        },
+      };
+
+      const { createApp, ref } = Vue;
+
+      createApp({
+        components: { MPinInput },
+        setup() {
+          // 響應式狀態
+          const pinValue1 = ref("");
+          const pinValue2 = ref("");
+          const pinValue3 = ref("");
+          const pinValue4 = ref("");
+          const pinValue5 = ref("");
+          const pinValue6 = ref("");
+          const pinValue7 = ref("");
+
+          const completed1 = ref(false);
+          const isDisabled = ref(false);
+          const lastGetValue = ref("");
+
+          const pinInputRef = ref(null);
+
+          // 事件處理
+          const onComplete1 = (value) => {
+            completed1.value = true;
+            console.log("✅ 輸入完成:", value);
+            setTimeout(() => {
+              completed1.value = false;
+            }, 3000);
+          };
+
+          const onComplete2 = (value) => {
+            console.log("✅ 4位數完成:", value);
+            alert(`4位數驗證碼輸入完成: ${value}`);
+          };
+
+          const onChange1 = (value, index) => {
+            console.log(`📝 第 ${index + 1} 個框改變:`, value);
+          };
+
+          const onChange5 = (value, index) => {
+            console.log(`🎮 程式化控制 - 第 ${index + 1} 個框改變:`, value);
+          };
+
+          // 控制方法
+          const toggleDisabled = () => {
+            isDisabled.value = !isDisabled.value;
+          };
+
+          const setValue = () => {
+            if (pinInputRef.value) {
+              pinInputRef.value.setValue("12345");
+            }
+          };
+
+          const clearValue = () => {
+            if (pinInputRef.value) {
+              pinInputRef.value.clear();
+            }
+          };
+
+          const focusFirst = () => {
+            if (pinInputRef.value) {
+              pinInputRef.value.focus(0);
+            }
+          };
+
+          const focusThird = () => {
+            if (pinInputRef.value) {
+              pinInputRef.value.focus(2);
+            }
+          };
+
+          const getValue = () => {
+            if (pinInputRef.value) {
+              const value = pinInputRef.value.getValue();
+              lastGetValue.value = value || "(空)";
+              alert(`當前值: ${value || "(空)"}`);
+            }
+          };
+
+          return {
+            pinValue1,
+            pinValue2,
+            pinValue3,
+            pinValue4,
+            pinValue5,
+            pinValue6,
+            pinValue7,
+            completed1,
+            isDisabled,
+            lastGetValue,
+            pinInputRef,
+            onComplete1,
+            onComplete2,
+            onChange1,
+            onChange5,
+            toggleDisabled,
+            setValue,
+            clearValue,
+            focusFirst,
+            focusThird,
+            getValue,
+          };
+        },
+      }).mount("#app");
+    </script>
+
+    <style>
+      /* 引入組件樣式 */
+      .m-pin-input {
+        --pin-input-size: 48px;
+        --pin-input-gap: 8px;
+        --pin-input-border-color: #d1d5db;
+        --pin-input-border-width: 1px;
+        --pin-input-border-radius: 6px;
+        --pin-input-focus-color: #3b82f6;
+        --pin-input-focus-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        --pin-input-disabled-color: #9ca3af;
+        --pin-input-disabled-bg: #f9fafb;
+        --pin-input-text-color: #1f2937;
+        --pin-input-font-size: 18px;
+        --pin-input-font-weight: 500;
+        --pin-input-bg-color: #ffffff;
+
+        display: flex;
+        align-items: center;
+        gap: var(--pin-input-gap);
+        font-family: inherit;
+      }
+
+      .m-pin-input__item {
+        width: var(--pin-input-size);
+        height: var(--pin-input-size);
+        border: var(--pin-input-border-width) solid
+          var(--pin-input-border-color);
+        border-radius: var(--pin-input-border-radius);
+        background-color: var(--pin-input-bg-color);
+        color: var(--pin-input-text-color);
+        font-size: var(--pin-input-font-size);
+        font-weight: var(--pin-input-font-weight);
+        text-align: center;
+        outline: none;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+        appearance: none;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+      }
+
+      .m-pin-input__item::-webkit-outer-spin-button,
+      .m-pin-input__item::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      .m-pin-input__item:focus,
+      .m-pin-input__item--focused {
+        border-color: var(--pin-input-focus-color);
+        box-shadow: var(--pin-input-focus-shadow);
+        transform: scale(1.02);
+      }
+
+      .m-pin-input__item--filled {
+        background-color: rgba(59, 130, 246, 0.05);
+        border-color: var(--pin-input-focus-color);
+      }
+
+      .m-pin-input__item--disabled {
+        background-color: var(--pin-input-disabled-bg);
+        border-color: var(--pin-input-disabled-color);
+        color: var(--pin-input-disabled-color);
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .m-pin-input__item--disabled:focus {
+        box-shadow: none;
+        transform: none;
+      }
+
+      .m-pin-input__item:hover:not(:disabled):not(:focus) {
+        border-color: var(--pin-input-focus-color);
+      }
+    </style>
+  </body>
+</html>

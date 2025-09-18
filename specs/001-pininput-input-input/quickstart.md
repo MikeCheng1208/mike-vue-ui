@@ -296,10 +296,21 @@ import { MPinInput } from '../dist/mike-vue-ui.es.js'
 ## 故障排除
 
 ### 常見問題
-1. **焦點不移動**: 檢查 DOM refs 是否正確設定
-2. **事件不觸發**: 檢查 emit 是否正確配置
-3. **樣式問題**: 檢查 scoped CSS 和 CSS 變數
-4. **效能問題**: 檢查是否有不必要的重新渲染
+1. **第一個字符不顯示**: 檢查是否使用了 `v-model` 與 `@input` 的雙重綁定，應改用 `:value` 單向綁定
+2. **焦點不移動**: 檢查 DOM refs 是否正確設定
+3. **事件不觸發**: 檢查 emit 是否正確配置
+4. **樣式問題**: 檢查 scoped CSS 和 CSS 變數
+5. **效能問題**: 檢查是否有不必要的重新渲染
+
+### 綁定衝突診斷
+如果遇到輸入字符不顯示的問題，檢查模板是否有以下錯誤模式：
+```vue
+<!-- ❌ 錯誤：雙重綁定衝突 -->
+<input v-model="inputValues[index]" @input="handleInput" />
+
+<!-- ✅ 正確：單向綁定 -->
+<input :value="inputValues[index]" @input="handleInput" />
+```
 
 ### 除錯工具
 - Vue DevTools: 檢查組件狀態和事件

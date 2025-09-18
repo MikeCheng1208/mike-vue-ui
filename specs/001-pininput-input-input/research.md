@@ -104,6 +104,24 @@ const setInputRef = (el, index) => {
 }
 ```
 
+### 模板綁定模式
+- **決策**: 使用 `:value` 單向綁定而非 `v-model` 雙向綁定
+- **理由**: 
+  - 避免 `v-model` 與自定義 `@input` 事件處理器的雙重綁定衝突
+  - 完全控制輸入邏輯，包括驗證、格式化和焦點管理
+  - 防止 Vue 的自動同步與手動狀態管理產生競爭條件
+- **實作方式**:
+  ```vue
+  <!-- ❌ 錯誤：會造成雙重綁定衝突 -->
+  <input v-model="inputValues[index]" @input="handleInput($event, index)" />
+  
+  <!-- ✅ 正確：單向綁定 + 自定義事件處理 -->
+  <input :value="inputValues[index]" @input="handleInput($event, index)" />
+  ```
+- **考慮的替代方案**: 
+  - `v-model` 雙向綁定: 與自定義輸入邏輯衝突，造成顯示問題
+  - 完全手動 DOM 操作: 失去 Vue 響應式系統的優勢
+
 ## 性能考量
 
 ### 避免不必要的重新渲染

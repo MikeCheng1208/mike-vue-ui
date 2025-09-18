@@ -26,7 +26,7 @@ plan.md、specify.md、tasks.md 以及其他的 .md 有可能產生完成後有�
 維持現有的架構及 coding style 去進行擴充跟開發
 
 ### II. 技術的選擇
-前端使用純 JavaScript ES6+ 來進行開發，不使用 TypeScript；Nodejs 的版本是 v20.19.4；CSS 的部分則維持，不使用其他CSS 框架；
+前端使用純 JavaScript ES6+ 來進行開發，不使用 TypeScript；Nodejs 的版本是 v20.19.4；CSS 的部分則維持，預設是不使用其他 CSS 框架，但如果專案本身已經有自己使用的 CSS 框架就沿用該專案使用的 CSS 框架
 
 ### III. Coding Style (NON-NEGOTIABLE)
-所有的技術的 Coding Style 請使用最佳實踐
+所有的技術的 Coding Style 以及做法請使用最佳實踐

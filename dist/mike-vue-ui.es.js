@@ -1,91 +1,91 @@
-import { getCurrentScope as W, onScopeDispose as x, unref as z, watch as A, ref as I, computed as M, openBlock as h, createElementBlock as y, createElementVNode as E, Fragment as S, renderList as $, toDisplayString as P, createCommentVNode as K, useSlots as q, normalizeStyle as O, renderSlot as G, normalizeClass as H, nextTick as k } from "vue";
-function J(n) {
-  return W() ? (x(n), !0) : !1;
+import { getCurrentScope as j, onScopeDispose as W, unref as z, watch as V, ref as k, computed as E, openBlock as g, createElementBlock as h, createElementVNode as w, Fragment as $, renderList as A, toDisplayString as M, createCommentVNode as J, useSlots as q, normalizeStyle as L, renderSlot as U, normalizeClass as N, nextTick as S, withDirectives as G, vModelText as H } from "vue";
+function Q(e) {
+  return j() ? (W(e), !0) : !1;
 }
-function L(n) {
-  return typeof n == "function" ? n() : z(n);
+function x(e) {
+  return typeof e == "function" ? e() : z(e);
 }
-const F = typeof window < "u", N = () => {
-}, Q = /* @__PURE__ */ U();
-function U() {
-  var n;
-  return F && ((n = window == null ? void 0 : window.navigator) == null ? void 0 : n.userAgent) && /* @__PURE__ */ /iP(ad|hone|od)/.test(window.navigator.userAgent);
+const R = typeof window < "u", F = () => {
+}, X = /* @__PURE__ */ Y();
+function Y() {
+  var e;
+  return R && ((e = window == null ? void 0 : window.navigator) == null ? void 0 : e.userAgent) && /* @__PURE__ */ /iP(ad|hone|od)/.test(window.navigator.userAgent);
 }
-function V(n) {
+function T(e) {
   var c;
-  const u = L(n);
-  return (c = u == null ? void 0 : u.$el) != null ? c : u;
+  const o = x(e);
+  return (c = o == null ? void 0 : o.$el) != null ? c : o;
 }
-const R = F ? window : void 0;
-function C(...n) {
-  let c, u, e, o;
-  if (typeof n[0] == "string" || Array.isArray(n[0]) ? ([u, e, o] = n, c = R) : [c, u, e, o] = n, !c)
-    return N;
-  Array.isArray(u) || (u = [u]), Array.isArray(e) || (e = [e]);
-  const v = [], d = () => {
-    v.forEach((s) => s()), v.length = 0;
-  }, _ = (s, m, a, f) => (s.addEventListener(m, a, f), () => s.removeEventListener(m, a, f)), i = A(
-    () => [V(c), L(o)],
-    ([s, m]) => {
-      d(), s && v.push(
-        ...u.flatMap((a) => e.map((f) => _(s, a, f, m)))
+const B = R ? window : void 0;
+function D(...e) {
+  let c, o, t, l;
+  if (typeof e[0] == "string" || Array.isArray(e[0]) ? ([o, t, l] = e, c = B) : [c, o, t, l] = e, !c)
+    return F;
+  Array.isArray(o) || (o = [o]), Array.isArray(t) || (t = [t]);
+  const f = [], m = () => {
+    f.forEach((r) => r()), f.length = 0;
+  }, v = (r, a, n, i) => (r.addEventListener(a, n, i), () => r.removeEventListener(a, n, i)), d = V(
+    () => [T(c), x(l)],
+    ([r, a]) => {
+      m(), r && f.push(
+        ...o.flatMap((n) => t.map((i) => v(r, n, i, a)))
       );
     },
     { immediate: !0, flush: "post" }
-  ), g = () => {
-    i(), d();
+  ), y = () => {
+    d(), m();
   };
-  return J(g), g;
+  return Q(y), y;
 }
-let T = !1;
-function X(n, c, u = {}) {
-  const { window: e = R, ignore: o = [], capture: v = !0, detectIframe: d = !1 } = u;
-  if (!e)
+let O = !1;
+function Z(e, c, o = {}) {
+  const { window: t = B, ignore: l = [], capture: f = !0, detectIframe: m = !1 } = o;
+  if (!t)
     return;
-  Q && !T && (T = !0, Array.from(e.document.body.children).forEach((a) => a.addEventListener("click", N)));
-  let _ = !0;
-  const i = (a) => o.some((f) => {
-    if (typeof f == "string")
-      return Array.from(e.document.querySelectorAll(f)).some((w) => w === a.target || a.composedPath().includes(w));
+  X && !O && (O = !0, Array.from(t.document.body.children).forEach((n) => n.addEventListener("click", F)));
+  let v = !0;
+  const d = (n) => l.some((i) => {
+    if (typeof i == "string")
+      return Array.from(t.document.querySelectorAll(i)).some((b) => b === n.target || n.composedPath().includes(b));
     {
-      const w = V(f);
-      return w && (a.target === w || a.composedPath().includes(w));
+      const b = T(i);
+      return b && (n.target === b || n.composedPath().includes(b));
     }
-  }), s = [
-    C(e, "click", (a) => {
-      const f = V(n);
-      if (!(!f || f === a.target || a.composedPath().includes(f))) {
-        if (a.detail === 0 && (_ = !i(a)), !_) {
-          _ = !0;
+  }), r = [
+    D(t, "click", (n) => {
+      const i = T(e);
+      if (!(!i || i === n.target || n.composedPath().includes(i))) {
+        if (n.detail === 0 && (v = !d(n)), !v) {
+          v = !0;
           return;
         }
-        c(a);
+        c(n);
       }
-    }, { passive: !0, capture: v }),
-    C(e, "pointerdown", (a) => {
-      const f = V(n);
-      f && (_ = !a.composedPath().includes(f) && !i(a));
+    }, { passive: !0, capture: f }),
+    D(t, "pointerdown", (n) => {
+      const i = T(e);
+      i && (v = !n.composedPath().includes(i) && !d(n));
     }, { passive: !0 }),
-    d && C(e, "blur", (a) => {
+    m && D(t, "blur", (n) => {
       setTimeout(() => {
-        var f;
-        const w = V(n);
-        ((f = e.document.activeElement) == null ? void 0 : f.tagName) === "IFRAME" && !(w != null && w.contains(e.document.activeElement)) && c(a);
+        var i;
+        const b = T(e);
+        ((i = t.document.activeElement) == null ? void 0 : i.tagName) === "IFRAME" && !(b != null && b.contains(t.document.activeElement)) && c(n);
       }, 0);
     })
   ].filter(Boolean);
-  return () => s.forEach((a) => a());
+  return () => r.forEach((n) => n());
 }
-const D = (n, c) => {
-  const u = n.__vccOpts || n;
-  for (const [e, o] of c)
-    u[e] = o;
-  return u;
-}, Y = {
+const C = (e, c) => {
+  const o = e.__vccOpts || e;
+  for (const [t, l] of c)
+    o[t] = l;
+  return o;
+}, ee = {
   relative: "",
   "w-full": "",
   "h-30px": ""
-}, Z = ["value"], ee = {
+}, te = ["value"], le = {
   key: 0,
   absolute: "",
   "top-30px": "",
@@ -94,7 +94,7 @@ const D = (n, c) => {
   "w-full": "",
   "h-auto": "",
   border: "0px x-1px gray-4 solid"
-}, te = ["onClick"], le = {
+}, ae = ["onClick"], ne = {
   __name: "MEmailInput",
   props: {
     modelValue: {
@@ -107,43 +107,43 @@ const D = (n, c) => {
     }
   },
   emits: ["update:modelValue"],
-  setup(n, { emit: c }) {
-    const u = n, e = I(null), o = I(!1), v = I(!1);
-    X(e, (s) => {
-      o.value = !1;
+  setup(e, { emit: c }) {
+    const o = e, t = k(null), l = k(!1), f = k(!1);
+    Z(t, (r) => {
+      l.value = !1;
     });
-    const d = M(() => u.options.suffix ? u.options.suffix.map((s) => u.modelValue.split("@")[0] + s) : []), _ = (s) => {
-      c("update:modelValue", s);
-    }, i = () => {
-      o.value = u.modelValue.length !== 0;
-    }, g = (s) => {
-      v.value = !0, o.value = !1, _(s), setTimeout(() => {
-        v.value = !1;
+    const m = E(() => o.options.suffix ? o.options.suffix.map((r) => o.modelValue.split("@")[0] + r) : []), v = (r) => {
+      c("update:modelValue", r);
+    }, d = () => {
+      l.value = o.modelValue.length !== 0;
+    }, y = (r) => {
+      f.value = !0, l.value = !1, v(r), setTimeout(() => {
+        f.value = !1;
       }, 300);
     };
-    return A(
-      () => u.modelValue,
+    return V(
+      () => o.modelValue,
       () => {
-        v.value || (o.value = u.modelValue.length !== 0);
+        f.value || (l.value = o.modelValue.length !== 0);
       }
-    ), (s, m) => (h(), y("div", Y, [
-      E("input", {
+    ), (r, a) => (g(), h("div", ee, [
+      w("input", {
         ref_key: "inputRef",
-        ref: e,
+        ref: t,
         "w-full": "",
         "h-full": "",
         "pl-10px": "",
-        value: n.modelValue,
+        value: e.modelValue,
         border: "1px gray-4 solid",
-        onInput: m[0] || (m[0] = (a) => _(a.target.value)),
-        onFocus: i
-      }, null, 40, Z),
-      o.value ? (h(), y("ul", ee, [
-        (h(!0), y(S, null, $(d.value, (a) => (h(), y("li", {
-          key: a,
+        onInput: a[0] || (a[0] = (n) => v(n.target.value)),
+        onFocus: d
+      }, null, 40, te),
+      l.value ? (g(), h("ul", le, [
+        (g(!0), h($, null, A(m.value, (n) => (g(), h("li", {
+          key: n,
           border: "0px b-1px gray-4 solid"
         }, [
-          E("a", {
+          w("a", {
             "cursor-pointer": "",
             "w-full": "",
             block: "",
@@ -151,17 +151,17 @@ const D = (n, c) => {
             "pl-10px": "",
             "text-14px": "",
             "hover:bg-gray-1": "",
-            onClick: (f) => g(a)
-          }, P(a), 9, te)
+            onClick: (i) => y(n)
+          }, M(n), 9, ae)
         ]))), 128))
-      ])) : K("", !0)
+      ])) : J("", !0)
     ]));
   }
-}, _e = /* @__PURE__ */ D(le, [["__scopeId", "data-v-5d750eee"]]);
-const ne = { class: "vue-pure-table" }, oe = { id: "columns" }, ue = {
+}, Ve = /* @__PURE__ */ C(ne, [["__scopeId", "data-v-7a0cd896"]]);
+const ue = { class: "vue-pure-table" }, oe = { id: "columns" }, se = {
   id: "rows",
   class: "flex-col"
-}, se = { key: 0 }, ae = {
+}, re = { key: 0 }, ie = {
   __name: "MPureTable",
   props: {
     columns: {
@@ -173,47 +173,47 @@ const ne = { class: "vue-pure-table" }, oe = { id: "columns" }, ue = {
       default: () => []
     }
   },
-  setup(n) {
-    const c = n, u = q(), e = M(() => c.columns.map((d) => d.field)), o = M(() => c.rows.map((d) => {
-      const _ = [];
-      return Object.keys(d).forEach((i, g) => {
-        e.value[g] && _.push(d[e.value[g]]);
-      }), _;
-    })), v = (d) => Object.keys(u).includes(d);
-    return (d, _) => (h(), y("div", ne, [
-      E("ul", oe, [
-        (h(!0), y(S, null, $(c.columns, (i) => (h(), y("li", {
-          key: i.label,
+  setup(e) {
+    const c = e, o = q(), t = E(() => c.columns.map((m) => m.field)), l = E(() => c.rows.map((m) => {
+      const v = [];
+      return Object.keys(m).forEach((d, y) => {
+        t.value[y] && v.push(m[t.value[y]]);
+      }), v;
+    })), f = (m) => Object.keys(o).includes(m);
+    return (m, v) => (g(), h("div", ue, [
+      w("ul", oe, [
+        (g(!0), h($, null, A(c.columns, (d) => (g(), h("li", {
+          key: d.label,
           class: "table_columns",
-          style: O(i.style)
-        }, P(i.label), 5))), 128))
+          style: L(d.style)
+        }, M(d.label), 5))), 128))
       ]),
-      E("ul", ue, [
-        (h(!0), y(S, null, $(o.value, (i, g) => (h(), y("li", { key: g }, [
-          E("ul", null, [
-            (h(!0), y(S, null, $(i, (s, m) => (h(), y("li", {
-              key: s.id,
-              style: O(c.columns[m].style)
+      w("ul", se, [
+        (g(!0), h($, null, A(l.value, (d, y) => (g(), h("li", { key: y }, [
+          w("ul", null, [
+            (g(!0), h($, null, A(d, (r, a) => (g(), h("li", {
+              key: r.id,
+              style: L(c.columns[a].style)
             }, [
-              v(c.columns[m].field) ? G(d.$slots, c.columns[m].field, {
+              f(c.columns[a].field) ? U(m.$slots, c.columns[a].field, {
                 key: 1,
-                data: { rowData: s, rowTarget: o.value[g] }
-              }, void 0, !0) : (h(), y("p", se, P(s), 1))
+                data: { rowData: r, rowTarget: l.value[y] }
+              }, void 0, !0) : (g(), h("p", re, M(r), 1))
             ], 4))), 128))
           ])
         ]))), 128))
       ])
     ]));
   }
-}, he = /* @__PURE__ */ D(ae, [["__scopeId", "data-v-38a75e1e"]]);
-const re = ["aria-label"], ce = ["value", "disabled", "aria-label", "onInput", "onKeydown", "onFocus", "onClick"], ie = {
+}, $e = /* @__PURE__ */ C(ie, [["__scopeId", "data-v-947644cc"]]);
+const ce = ["aria-label"], de = ["value", "disabled", "aria-label", "onInput", "onKeydown", "onFocus", "onClick"], pe = {
   __name: "MPinInput",
   props: {
     // 輸入框數量，預設為 5
     length: {
       type: Number,
       default: 5,
-      validator: (n) => n > 0 && n <= 10
+      validator: (e) => e > 0 && e <= 10
     },
     // 是否禁用組件
     disabled: {
@@ -234,136 +234,259 @@ const re = ["aria-label"], ce = ["value", "disabled", "aria-label", "onInput", "
     "change"
     // 單個輸入框改變事件
   ],
-  setup(n, { expose: c, emit: u }) {
-    const e = n, o = I([]), v = I(0), d = I([]), _ = () => {
-      if (o.value = new Array(e.length).fill(""), e.modelValue) {
-        e.modelValue.split("").slice(0, e.length).forEach((r, p) => {
-          /^\d$/.test(r) && (o.value[p] = r);
+  setup(e, { expose: c, emit: o }) {
+    const t = e, l = k([]), f = k(0), m = k([]), v = () => {
+      if (l.value = new Array(t.length).fill(""), t.modelValue) {
+        t.modelValue.split("").slice(0, t.length).forEach((p, _) => {
+          /^\d$/.test(p) && (l.value[_] = p);
         });
-        const l = o.value.findIndex((r) => r === "");
-        v.value = l === -1 ? e.length - 1 : l;
+        const s = l.value.findIndex((p) => p === "");
+        f.value = s === -1 ? t.length - 1 : s;
       }
-    }, i = M(() => o.value.join(""));
-    A(
-      () => e.length,
+    }, d = E(() => l.value.join(""));
+    V(
+      () => t.length,
       () => {
-        _();
+        v();
       },
       { immediate: !0 }
-    ), A(
-      () => e.modelValue,
-      (t) => {
-        t !== i.value && _();
+    ), V(
+      () => t.modelValue,
+      (u) => {
+        u !== d.value && v();
       }
-    ), A(i, (t) => {
-      u("update:modelValue", t), t.length === e.length && t.split("").every((l) => /^\d$/.test(l)) && u("complete", t);
+    ), V(d, (u) => {
+      o("update:modelValue", u), u.length === t.length && u.split("").every((s) => /^\d$/.test(s)) && o("complete", u);
     });
-    const g = (t, l) => {
-      t && (d.value[l] = t);
-    }, s = (t) => {
-      t >= 0 && t < e.length && d.value[t] && (d.value[t].focus(), v.value = t);
-    }, m = (t) => /^\d$/.test(t), a = (t, l) => {
-      if (e.disabled)
+    const y = (u, s) => {
+      u && (m.value[s] = u);
+    }, r = (u) => {
+      u >= 0 && u < t.length && m.value[u] && (m.value[u].focus(), f.value = u);
+    }, a = (u) => /^\d$/.test(u), n = (u, s) => {
+      if (t.disabled)
         return;
-      const r = t.target.value, p = r.slice(-1);
-      if (p && !m(p)) {
-        t.target.value = o.value[l];
+      const p = u.target.value, _ = p.slice(-1);
+      if (_ && !a(_)) {
+        u.target.value = l.value[s];
         return;
       }
-      p && m(p) ? (o.value[l] = p, u("change", i.value, l), l < e.length - 1 && k(() => {
-        s(l + 1);
-      })) : r === "" && (o.value[l] = "", u("change", i.value, l));
-    }, f = (t, l) => {
-      if (e.disabled)
+      _ && a(_) ? (l.value[s] = _, o("change", d.value, s), s < t.length - 1 && S(() => {
+        r(s + 1);
+      })) : p === "" && (l.value[s] = "", o("change", d.value, s));
+    }, i = (u, s) => {
+      if (t.disabled)
         return;
-      const { key: r } = t;
-      if (r === "Backspace") {
-        t.preventDefault(), o.value[l] !== "" ? (o.value[l] = "", u("change", i.value, l)) : l > 0 && (o.value[l - 1] = "", u("change", i.value, l - 1), k(() => {
-          s(l - 1);
+      const { key: p } = u;
+      if (p === "Backspace") {
+        u.preventDefault(), l.value[s] !== "" ? (l.value[s] = "", o("change", d.value, s)) : s > 0 && (l.value[s - 1] = "", o("change", d.value, s - 1), S(() => {
+          r(s - 1);
         }));
         return;
       }
-      if (r === "Delete") {
-        t.preventDefault(), o.value[l] = "", u("change", i.value, l);
+      if (p === "Delete") {
+        u.preventDefault(), l.value[s] = "", o("change", d.value, s);
         return;
       }
-      if (r === "ArrowLeft" && l > 0) {
-        t.preventDefault(), s(l - 1);
+      if (p === "ArrowLeft" && s > 0) {
+        u.preventDefault(), r(s - 1);
         return;
       }
-      if (r === "ArrowRight" && l < e.length - 1) {
-        t.preventDefault(), s(l + 1);
+      if (p === "ArrowRight" && s < t.length - 1) {
+        u.preventDefault(), r(s + 1);
         return;
       }
-      if (m(r)) {
-        t.preventDefault(), o.value[l] = r, u("change", i.value, l), l < e.length - 1 && k(() => {
-          s(l + 1);
+      if (a(p)) {
+        u.preventDefault(), l.value[s] = p, o("change", d.value, s), s < t.length - 1 && S(() => {
+          r(s + 1);
         });
         return;
       }
-      !/^(Tab|Shift|Control|Alt|Meta|CapsLock)$/.test(r) && !r.startsWith("Arrow") && t.preventDefault();
-    }, w = (t) => {
-      e.disabled || (v.value = t);
-    }, B = (t) => {
-      e.disabled || s(t);
+      !/^(Tab|Shift|Control|Alt|Meta|CapsLock)$/.test(p) && !p.startsWith("Arrow") && u.preventDefault();
+    }, b = (u) => {
+      t.disabled || (f.value = u);
+    }, P = (u) => {
+      t.disabled || r(u);
     };
     return c({
-      focus: (t) => {
-        if (typeof t == "number")
-          s(t);
+      focus: (u) => {
+        if (typeof u == "number")
+          r(u);
         else {
-          const l = o.value.findIndex((p) => p === ""), r = l === -1 ? e.length - 1 : l;
-          s(r);
+          const s = l.value.findIndex((_) => _ === ""), p = s === -1 ? t.length - 1 : s;
+          r(p);
         }
       },
       clear: () => {
-        o.value = new Array(e.length).fill(""), v.value = 0, k(() => {
-          s(0);
+        l.value = new Array(t.length).fill(""), f.value = 0, S(() => {
+          r(0);
         });
       },
-      getValue: () => i.value,
-      setValue: (t) => {
-        if (typeof t != "string")
+      getValue: () => d.value,
+      setValue: (u) => {
+        if (typeof u != "string")
           return;
-        o.value = new Array(e.length).fill(""), t.split("").slice(0, e.length).forEach((b, j) => {
-          m(b) && (o.value[j] = b);
+        l.value = new Array(t.length).fill(""), u.split("").slice(0, t.length).forEach((I, K) => {
+          a(I) && (l.value[K] = I);
         });
-        const r = o.value.findIndex((b) => b === ""), p = r === -1 ? e.length - 1 : r;
-        k(() => {
-          s(p);
+        const p = l.value.findIndex((I) => I === ""), _ = p === -1 ? t.length - 1 : p;
+        S(() => {
+          r(_);
         });
       }
-    }), (t, l) => (h(), y("div", {
+    }), (u, s) => (g(), h("div", {
       class: "m-pin-input",
       role: "group",
-      "aria-label": `密碼輸入，共 ${n.length} 位數`
+      "aria-label": `密碼輸入，共 ${e.length} 位數`
     }, [
-      (h(!0), y(S, null, $(o.value, (r, p) => (h(), y("input", {
-        key: p,
+      (g(!0), h($, null, A(l.value, (p, _) => (g(), h("input", {
+        key: _,
         ref_for: !0,
-        ref: (b) => g(b, p),
-        value: r,
+        ref: (I) => y(I, _),
+        value: p,
         type: "text",
         inputmode: "numeric",
         autocomplete: "off",
         maxlength: "1",
-        class: H(["m-pin-input__item", {
-          "m-pin-input__item--focused": v.value === p,
-          "m-pin-input__item--filled": r !== "",
-          "m-pin-input__item--disabled": n.disabled
+        class: N(["m-pin-input__item", {
+          "m-pin-input__item--focused": f.value === _,
+          "m-pin-input__item--filled": p !== "",
+          "m-pin-input__item--disabled": e.disabled
         }]),
-        disabled: n.disabled,
-        "aria-label": `第 ${p + 1} 位數字`,
-        onInput: (b) => a(b, p),
-        onKeydown: (b) => f(b, p),
-        onFocus: (b) => w(p),
-        onClick: (b) => B(p)
-      }, null, 42, ce))), 128))
-    ], 8, re));
+        disabled: e.disabled,
+        "aria-label": `第 ${_ + 1} 位數字`,
+        onInput: (I) => n(I, _),
+        onKeydown: (I) => i(I, _),
+        onFocus: (I) => b(_),
+        onClick: (I) => P(_)
+      }, null, 42, de))), 128))
+    ], 8, ce));
   }
-}, ye = /* @__PURE__ */ D(ie, [["__scopeId", "data-v-37a7c5a2"]]);
+}, Ae = /* @__PURE__ */ C(pe, [["__scopeId", "data-v-5aece818"]]);
+const fe = { class: "m-input-tags__container" }, me = ["aria-label"], ve = ["title"], _e = ["aria-label", "disabled", "onClick"], ge = ["placeholder", "disabled", "aria-label"], he = {
+  __name: "MInputTags",
+  props: {
+    modelValue: {
+      type: Array,
+      default: () => [],
+      validator: (e) => Array.isArray(e) && e.every((c) => typeof c == "string")
+    },
+    disabled: {
+      type: Boolean,
+      default: !1
+    },
+    maxTags: {
+      type: Number,
+      default: null,
+      validator: (e) => e === null || typeof e == "number" && e > 0
+    },
+    maxTagLength: {
+      type: Number,
+      default: 150,
+      validator: (e) => typeof e == "number" && e > 0
+    },
+    placeholder: {
+      type: String,
+      default: "輸入後按 Enter 新增標籤"
+    }
+  },
+  emits: [
+    "update:modelValue",
+    // v-model 雙向綁定
+    "add",
+    // 新增標籤時觸發 (tag: string)
+    "remove",
+    // 移除標籤時觸發 (tag: string, index: number)
+    "limit-reached"
+    // 達到數量上限時觸發
+  ],
+  setup(e, { expose: c, emit: o }) {
+    const t = e, l = k([]), f = k(""), m = k(null), v = E(() => t.maxTags !== null && l.value.length >= t.maxTags);
+    E(() => !t.disabled && !v.value), V(() => t.modelValue, (a) => {
+      JSON.stringify(a) !== JSON.stringify(l.value) && (l.value = [...a]);
+    }, { immediate: !0, deep: !0 }), V(l, (a) => {
+      o("update:modelValue", a);
+    }, { deep: !0 });
+    const d = (a) => {
+      const n = a.trim();
+      if (n) {
+        if (v.value) {
+          o("limit-reached");
+          return;
+        }
+        n.length > t.maxTagLength || (l.value.push(n), o("add", n), f.value = "");
+      }
+    }, y = (a) => {
+      a.key === "Enter" && (a.preventDefault(), d(f.value));
+    }, r = (a) => {
+      if (a < 0 || a >= l.value.length)
+        return;
+      const n = l.value[a];
+      l.value.splice(a, 1), o("remove", n, a);
+    };
+    return c({
+      // 聚焦輸入框
+      focus: () => {
+        var a;
+        (a = m.value) == null || a.focus();
+      },
+      // 清空所有標籤
+      clear: () => {
+        l.value = [], o("update:modelValue", []);
+      },
+      // 程式化新增標籤
+      addTag: (a) => {
+        d(a);
+      },
+      // 程式化移除標籤
+      removeTag: (a) => {
+        r(a);
+      },
+      // 取得所有標籤（回傳副本）
+      getTags: () => [...l.value]
+    }), (a, n) => (g(), h("div", {
+      class: N(["m-input-tags", { "m-input-tags--disabled": e.disabled }]),
+      role: "group",
+      "aria-label": "標籤輸入"
+    }, [
+      w("div", fe, [
+        (g(!0), h($, null, A(l.value, (i, b) => (g(), h("div", {
+          key: b,
+          class: "m-input-tags__tag",
+          role: "listitem",
+          "aria-label": `標籤: ${i}`
+        }, [
+          w("span", {
+            class: "m-input-tags__tag-text",
+            title: i
+          }, M(i), 9, ve),
+          w("button", {
+            type: "button",
+            class: "m-input-tags__tag-remove",
+            "aria-label": `移除標籤 ${i}`,
+            disabled: e.disabled,
+            onClick: (P) => r(b)
+          }, " × ", 8, _e)
+        ], 8, me))), 128)),
+        G(w("input", {
+          ref_key: "inputRef",
+          ref: m,
+          "onUpdate:modelValue": n[0] || (n[0] = (i) => f.value = i),
+          type: "text",
+          class: "m-input-tags__input",
+          placeholder: v.value ? "已達標籤數量上限" : e.placeholder,
+          disabled: e.disabled || v.value,
+          "aria-label": e.placeholder,
+          onKeydown: y
+        }, null, 40, ge), [
+          [H, f.value]
+        ])
+      ])
+    ], 2));
+  }
+}, Ee = /* @__PURE__ */ C(he, [["__scopeId", "data-v-82d29b24"]]);
 export {
-  _e as MEmailInput,
-  ye as MPinInput,
-  he as MPureTable
+  Ve as MEmailInput,
+  Ee as MInputTags,
+  Ae as MPinInput,
+  $e as MPureTable
 };

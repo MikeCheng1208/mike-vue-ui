@@ -229,6 +229,91 @@ const rows = ref([
 ```
 </details>
 
+<br/>
+
+<details>
+<summary>4. Input Tags</summary>
+
+## Input Tags
+- 標籤輸入元件，支援 Enter 鍵新增標籤，點擊 X 按鈕移除標籤
+- 使用 ref 包裹 Array 管理標籤，單行水平滾動顯示
+
+```javascript
+import { MInputTags } from "mike-vue-ui";
+
+const tags = ref(['Vue', 'React']);
+
+// 新增標籤時的回調
+const onAdd = (tag) => {
+  console.log('新增標籤:', tag);
+};
+
+// 移除標籤時的回調
+const onRemove = (tag, index) => {
+  console.log('移除標籤:', tag, '索引:', index);
+};
+
+// 達到上限時的回調
+const onLimitReached = () => {
+  alert('已達到標籤數量上限！');
+};
+```
+
+```html
+<!-- 基本使用 -->
+<m-input-tags v-model="tags" @add="onAdd" @remove="onRemove"></m-input-tags>
+
+<!-- 限制數量 -->
+<m-input-tags v-model="tags" :max-tags="5" @limit-reached="onLimitReached"></m-input-tags>
+
+<!-- 限制長度 -->
+<m-input-tags v-model="tags" :max-tag-length="20"></m-input-tags>
+
+<!-- 禁用狀態 -->
+<m-input-tags v-model="tags" :disabled="true"></m-input-tags>
+
+<!-- 自定義占位文字 -->
+<m-input-tags v-model="tags" placeholder="輸入關鍵字..."></m-input-tags>
+```
+
+### 程式化控制
+```javascript
+// 獲取組件引用
+const inputTagsRef = ref(null);
+
+// 新增標籤
+inputTagsRef.value.addTag('JavaScript');
+
+// 移除標籤
+inputTagsRef.value.removeTag(0); // 移除第一個
+
+// 清空所有標籤
+inputTagsRef.value.clear();
+
+// 聚焦輸入框
+inputTagsRef.value.focus();
+
+// 取得所有標籤
+const allTags = inputTagsRef.value.getTags();
+```
+
+### 特色功能
+- ✅ **使用 ref + Array**: 符合 Vue 3 最佳實踐
+- ✅ **單行水平滾動**: 標籤過多時支援滾動查看
+- ✅ **長標籤截斷**: 自動截斷並顯示省略號
+- ✅ **可配置上限**: 支援設定標籤數量和長度限制
+- ✅ **空白驗證**: 自動忽略空白輸入
+- ✅ **允許重複**: 支援新增相同標籤
+- ✅ **可訪問性支援**: ARIA 屬性、鍵盤操作
+- ✅ **自定義主題**: CSS 變數支援
+- ✅ **響應式設計**: 支援桌面、平板、手機
+- ✅ **深色模式**: 自動適應深色主題
+
+### 示例頁面
+查看 [example/input-tags.html](example/input-tags.html) 獲取更多使用範例。
+
+</details>
+
 
 
 ## License

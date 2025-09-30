@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MInputTags 示例 - Mike Vue UI</title>
+    <link rel="stylesheet" href="../dist/index.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+      .demo-section {
+        margin-bottom: 40px;
+        padding: 20px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .info {
+        margin-top: 16px;
+        padding: 12px;
+        background: #f9fafb;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      button {
+        margin-top: 8px;
+        margin-right: 8px;
+        padding: 8px 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #f3f4f6;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MInputTags 元件示例</h1>
+
+    <div id="app">
+      <!-- 基本使用 -->
+      <div class="demo-section">
+        <h2>基本使用</h2>
+        <m-input-tags v-model="basicTags"></m-input-tags>
+        <div class="info">標籤: {{ basicTags.join(', ') || '(無)' }}</div>
+      </div>
+
+      <!-- 限制數量 -->
+      <div class="demo-section">
+        <h2>限制數量（最多 5 個）</h2>
+        <m-input-tags v-model="limitedTags" :max-tags="5" @limit-reached="handleLimitReached"></m-input-tags>
+        <div class="info">已使用: {{ limitedTags.length }} / 5</div>
+      </div>
+
+      <!-- 禁用狀態 -->
+      <div class="demo-section">
+        <h2>禁用狀態</h2>
+        <m-input-tags v-model="disabledTags" :disabled="isDisabled"></m-input-tags>
+        <button @click="isDisabled = !isDisabled">{{ isDisabled ? '啟用' : '禁用' }}</button>
+      </div>
+
+      <!-- 程式化操作 -->
+      <div class="demo-section">
+        <h2>程式化操作</h2>
+        <m-input-tags ref="apiTagsRef" v-model="apiTags"></m-input-tags>
+        <div>
+          <button @click="addPresetTag">新增預設標籤</button>
+          <button @click="removeFirstTag">移除第一個</button>
+          <button @click="clearAllTags">清空所有</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { createApp, ref } from "vue";
+      import { MInputTags } from "../dist/mike-vue-ui.es.js";
+
+      createApp({
+        components: { MInputTags },
+        setup() {
+          const basicTags = ref(["Vue", "React"]);
+          const limitedTags = ref([]);
+          const disabledTags = ref(["JavaScript", "TypeScript"]);
+          const isDisabled = ref(true);
+          const apiTags = ref([]);
+          const apiTagsRef = ref(null);
+
+          const handleLimitReached = () => {
+            alert("已達到 5 個標籤上限！");
+          };
+
+          const addPresetTag = () => {
+            apiTagsRef.value?.addTag("預設標籤");
+          };
+
+          const removeFirstTag = () => {
+            if (apiTags.value.length > 0) {
+              apiTagsRef.value?.removeTag(0);
+            }
+          };
+
+          const clearAllTags = () => {
+            apiTagsRef.value?.clear();
+          };
+
+          return {
+            basicTags,
+            limitedTags,
+            disabledTags,
+            isDisabled,
+            apiTags,
+            apiTagsRef,
+            handleLimitReached,
+            addPresetTag,
+            removeFirstTag,
+            clearAllTags,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

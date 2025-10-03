@@ -44,3 +44,6 @@ Cookie 必須設定 Secure、HttpOnly、SameSite 屬性；localStorage/sessionSt
 
 ### III. Coding Style (NON-NEGOTIABLE)
 所有的技術的 Coding Style 以及做法請使用最佳實踐
+
+### example 撰寫
+完全參照現有專案規則去實作，使用 script type="importmap" 的方式引入 https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.41/vue.esm-browser.prod.js，import 組件則使用 build 完成的檔案 "../dist/mike-vue-ui.es.js" 去載入，CSS 的話則是載入 "../dist/index.css"
